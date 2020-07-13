@@ -95,6 +95,11 @@ body{
 
 .counter{
     display:inline-block;
+    color:black;
+}
+
+.counter.overcap{
+    color:red;
 }
 
 .capacity{
