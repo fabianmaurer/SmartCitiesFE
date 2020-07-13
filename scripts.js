@@ -71,7 +71,7 @@ function init(){
     addChoiceListeners();
 }
 function loadEvents(callback){
-    $.get("http://smart-cities-backend.herokuapp.com/api/sensorevents",callback);
+    $.get("https://smart-cities-backend.herokuapp.com/api/sensorevents",callback);
 }
 
 function addChoiceListeners(){
