@@ -1,0 +1,102 @@
+body{
+    padding:0;
+    margin:0;
+    font-size:32px;
+    font-family:'Open Sans';
+    color:#444;
+}
+
+#landing{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+
+#landing-choices{
+    overflow:visible;
+}
+
+#landing.middle{
+
+}
+
+.choice{
+    float:left;
+    padding:1em;
+    text-align:center;
+    margin:1em;
+    transition:transform 0.2s ease;
+    cursor:pointer;
+    width:220px;
+    border:1px solid rgba(0,0,0,0.2);
+    color:white;
+}
+
+.blue{
+    background-color:#23b7e5;
+}
+
+.orange{
+    background-color:#ff902b;
+}
+
+.red{
+    background-color:#f05050;
+}
+
+.green{
+    background-color:#27c24c;
+}
+
+.choice:hover{
+    transform:scale(1.2);
+}
+
+.choice-icon{
+    font-size:3em;
+    color:rgba(255,255,255,0.6);
+}
+
+.choice-text{
+    font-size:1.2em;
+    margin-bottom:4px;
+}
+
+#landing-heading{
+    text-align:center;
+    font-size:1.4em;
+    font-weight: 600;
+}
+
+#map{
+    background-image: url("./assets/images/map2.png");
+    width:100%;
+    height:100%;
+    background-size:contain;
+    position:rel
+}
+
+.building{
+    border:3px solid rgba(0,0,0,0.2);
+    background-color:rgba(0,0,0,0.4);
+    display:block;
+    position: absolute;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.building.groceries{
+    background-color:rgba(35, 183, 229,0.7);
+}
+
+.counter{
+    display:inline-block;
+}
+
+.capacity{
+    display:inline-block;
+}
