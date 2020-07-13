@@ -8,7 +8,8 @@ const shops=[
         width:10,
         height:20,
         capacity:10,
-        count:0
+        count:0,
+        distance:2
     },
     {
         type:"groceries",
@@ -17,7 +18,8 @@ const shops=[
         width:20,
         height:10,
         capacity:8,
-        count:0
+        count:0,
+        distance:2
     },
     {
         type:"groceries",
@@ -26,7 +28,8 @@ const shops=[
         width:20,
         height:10,
         capacity:12,
-        count:0
+        count:0,
+        distance:5
     }
     // ,
     // {
@@ -104,6 +107,13 @@ function initBuildings(){
         $c.append($count);
         $c.append($cap);
         $b.append($c);
+        let $bar=$(document.createElement('div'));
+        $bar.attr('class','fillupbar');
+        $b.append($bar)
+        let $rec=$(document.createElement('div'));
+        $rec.attr('class','recommended-text');
+        $rec.html('recommended');
+        $b.append($rec)
         $('#map').append($b);
     }
 }
@@ -150,20 +160,62 @@ function checkForUpdate(){
 }
 
 function increaseCount(buildingId){
-    console.log('increase')
-    shops[buildingId].count++;
+    console.log('increase');
+    let shop=shops[buildingId];
+    shop.count++;
     let $c=$('.bid'+buildingId).find('.counter');
-    $c.html(shops[buildingId].count);
-    if(shops[buildingId].count>=shops[buildingId].capacity){
+    $c.html(shop.count);
+    let $f=$('.bid'+buildingId).find('.fillupbar');
+    $f.css('height',100*shop.count/shop.capacity+'%');
+    if(shop.count>=shop.capacity){
         $c.addClass('overcap');
     }
+    showBestShop();
 }
 
 function decreaseCount(buildingId){
-    shops[buildingId].count--;
+    let shop=shops[buildingId];
+    if(shop.count>0) shop.count--;
     let $c=$('.bid'+buildingId).find('.counter');
-    $c.html(shops[buildingId].count);
-    if(shops[buildingId].count<shops[buildingId].capacity){
+    $c.html(shop.count);
+    let $f=$('.bid'+buildingId).find('.fillupbar');
+    $f.css('height',100*shop.count/shop.capacity+'%');
+    if(shop.count<shop.capacity){
         $c.removeClass('overcap');
     }
+    showBestShop();
+}
+
+function showBestShop(){
+    let newId=calcBestShop();
+    $('.recommended').removeClass('recommended');
+    $('.bid'+newId).addClass('recommended');
+
+}
+
+function calcBestShop(){
+    let lowScore=10000;
+    let lowScoreId=0;
+    let c=0;
+    for(let b of shops){
+        
+        console.log(b.distance)
+        console.log(b.capacity)
+        console.log(b.count)
+        let score=0.1*b.distance+b.distance*b.count/b.capacity;
+        if(c==0){
+            lowScore=score;
+            lowScoreId=c;
+        }else{
+            console.log(score)
+            console.log(lowScore)
+            if(score<lowScore){
+                lowScore=score;
+                lowScoreId=c;
+            }
+        }
+        c++;
+    }
+    console.log(lowScoreId)
+    return lowScoreId;
 }
